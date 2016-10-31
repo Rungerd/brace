@@ -21,6 +21,7 @@ var buildroot     =  path.join(__dirname, 'ace-build');
 
 var aceTag = 'v1.2.3';
 
+/*
 +function updateCleanAndPutInOrder() {
 
   +function cloneFreshAndRemoveUnneeded() {
@@ -95,6 +96,7 @@ var aceTag = 'v1.2.3';
   }()
 
 }()
+//*/
 
 +function requires() {
   function fixAllRequires(dir) {

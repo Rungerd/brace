@@ -371,7 +371,7 @@ oop.inherits(Mode, TextMode);
     };
     
     this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], require("../worker/coffee"), "Worker");
+        var worker = new WorkerClient(["ace"], acequire("../worker/coffee"), "Worker");
         worker.attachToDocument(session.getDocument());
         
         worker.on("annotate", function(e) {
