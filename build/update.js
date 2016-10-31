@@ -102,8 +102,16 @@ var aceTag = 'v1.2.3';
   function fixAllRequires(dir) {
     ls(path.join(dir, '*.js'))
       .forEach(function (file) {
-        var src = fs.readFileSync(file, 'utf-8');
-        var fixed = fixRequires(src);
+		  var src = fs.readFileSync(file, 'utf-8');
+		  var fixed = fixRequires(src);
+		  if ( dir === workersrcdir && file.match(/html\.js$/i) ) {
+			var htmllintPath = path.join(path.resolve(workersrcdir, '../htmllint.js'));
+			console.log('1 >>>> ', workersrcdir);
+			console.log('2 >>>> ', file);
+			console.log('3 >>>> ', htmllintPath);
+			fixed = fs.readFileSync(htmllintPath, 'utf-8') + fixed;
+		  }
+
         fs.writeFileSync(file, fixed, 'utf-8');
       });
   }
