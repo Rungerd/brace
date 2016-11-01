@@ -11,6 +11,7 @@ require('shelljs/global');
 var braceroot     =  path.join(__dirname, '..');
 var buildroot     =  path.join(__dirname, 'DefinitelyTyped');
 
+/*
 +function cloneFreshAndRemoveUnneeded() {
   rm('-rf', buildroot)
   exec('git clone git://github.com/DefinitelyTyped/DefinitelyTyped.git ' + buildroot);
@@ -22,6 +23,7 @@ var buildroot     =  path.join(__dirname, 'DefinitelyTyped');
   mv(path.join(buildroot, 'ace/*'), buildroot)
   rm('-rf', path.join(buildroot, 'ace'));
 }()
+//*/
 
 +function requires() {
   var file = path.join(buildroot, 'ace.d.ts')
