@@ -1119,7 +1119,7 @@ oop.inherits(Mode, TextMode);
     };
 
     this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], acequire("../worker/javascript"), "JavaScriptWorker");
+        var worker = new WorkerClient(["ace"], require("../worker/javascript"), "JavaScriptWorker");
         worker.attachToDocument(session.getDocument());
 
         worker.on("annotate", function(results) {
@@ -1590,7 +1590,7 @@ oop.inherits(Mode, TextMode);
     };
 
     this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], acequire("../worker/css"), "Worker");
+        var worker = new WorkerClient(["ace"], require("../worker/css"), "Worker");
         worker.attachToDocument(session.getDocument());
 
         worker.on("annotate", function(e) {
@@ -2756,7 +2756,7 @@ oop.inherits(Mode, TextMode);
     this.createWorker = function(session) {
         if (this.constructor != Mode)
             return;
-        var worker = new WorkerClient(["ace"], acequire("../worker/html"), "Worker");
+        var worker = new WorkerClient(["ace"], require("../worker/html"), "Worker");
         worker.attachToDocument(session.getDocument());
 
         if (this.fragmentContext)
@@ -3183,7 +3183,7 @@ oop.inherits(Mode, TextMode);
     };
 
     this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], acequire("../worker/lua"), "Worker");
+        var worker = new WorkerClient(["ace"], require("../worker/lua"), "Worker");
         worker.attachToDocument(session.getDocument());
         
         worker.on("annotate", function(e) {

@@ -640,7 +640,7 @@ oop.inherits(Mode, TextMode);
     this.blockComment = {start: "<!--", end: "-->"};
 
     this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], acequire("../worker/xml"), "Worker");
+        var worker = new WorkerClient(["ace"], require("../worker/xml"), "Worker");
         worker.attachToDocument(session.getDocument());
 
         worker.on("error", function(e) {
@@ -1781,7 +1781,7 @@ oop.inherits(Mode, TextMode);
     };
 
     this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], acequire("../worker/javascript"), "JavaScriptWorker");
+        var worker = new WorkerClient(["ace"], require("../worker/javascript"), "JavaScriptWorker");
         worker.attachToDocument(session.getDocument());
 
         worker.on("annotate", function(results) {

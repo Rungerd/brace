@@ -21,12 +21,12 @@ var buildroot     =  path.join(__dirname, 'ace-build');
 
 var aceTag = 'v1.2.3';
 
-/*
+//*
 +function updateCleanAndPutInOrder() {
 
   +function cloneFreshAndRemoveUnneeded() {
     rm('-rf', buildroot)
-    exec('git clone git://github.com/ajaxorg/ace-builds.git ' + buildroot);
+    exec('git clone git://github.com/neocoder/ace-builds.git ' + buildroot);
     exec('(cd ' + buildroot + ' && git pull && git checkout ' + aceTag + ')');
 
     [ 'demo', 'kitchen-sink', 'src-min-noconflict', 'src-min', 'src', 'textarea' ]
@@ -104,14 +104,6 @@ var aceTag = 'v1.2.3';
       .forEach(function (file) {
 		  var src = fs.readFileSync(file, 'utf-8');
 		  var fixed = fixRequires(src);
-		  if ( dir === workersrcdir && file.match(/html\.js$/i) ) {
-			var htmllintPath = path.join(path.resolve(workersrcdir, '../htmllint.js'));
-			console.log('1 >>>> ', workersrcdir);
-			console.log('2 >>>> ', file);
-			console.log('3 >>>> ', htmllintPath);
-			fixed = fs.readFileSync(htmllintPath, 'utf-8') + fixed;
-		  }
-
         fs.writeFileSync(file, fixed, 'utf-8');
       });
   }
