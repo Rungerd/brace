@@ -8,12 +8,14 @@ var path   =  require('path')
 
 
 function minify(code) {
-  // var compressor = uglify.Compressor()
-  //   , ast = uglify.parse(code);
+  var compressor = uglify.Compressor()
+    , ast = uglify.parse(code);
 
-  // ast.figure_out_scope();
-  // return ast.transform(compressor).print_to_string();
-  return uglify.minify(code, {fromString: true}).code;
+  ast.figure_out_scope();
+  var compAst = ast.transform(compressor)
+  compAst.figure_out_scope();
+
+  return compAst.print_to_string();
 }
 
 module.exports = function () {
@@ -25,7 +27,10 @@ module.exports = function () {
       var src = fs.readFileSync(file, 'utf-8');
 
       var dst = path.join(__dirname, '..', 'worker', filename);
-      var stringified = JSON.stringify(minify(src));
+
+      var stringified = ( worker === 'html' )
+        ? JSON.stringify(src.replace(/\n+/, ''))
+        : JSON.stringify(minify(src));
 
       // need a String object here so we can attach extra props like src
       var code =  'module.exports.id = \'ace/mode/' + worker + '_worker\';\n'
