@@ -13,7 +13,7 @@ function minify(code) {
 
   // ast.figure_out_scope();
   // return ast.transform(compressor).print_to_string();
-  return uglify.minify(code, {fromString: true});
+  return uglify.minify(code, {fromString: true}).code;
 }
 
 module.exports = function () {
