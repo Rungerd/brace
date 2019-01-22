@@ -18,7 +18,23 @@ var LatexHighlightRules = function() {
             regex : "(\\\\(?:label|v?ref|cite(?:[^{]*)))(?:({)([^}]*)(}))?"
         }, {
             token : ["storage.type", "lparen", "variable.parameter", "rparen"],
-            regex : "(\\\\(?:begin|end))({)(\\w*)(})"
+            regex : "(\\\\begin)({)(verbatim)(})",
+            next : "verbatim"
+        },  {
+            token : ["storage.type", "lparen", "variable.parameter", "rparen"],
+            regex : "(\\\\begin)({)(lstlisting)(})",
+            next : "lstlisting"
+        },  {
+            token : ["storage.type", "lparen", "variable.parameter", "rparen"],
+            regex : "(\\\\(?:begin|end))({)([\\w*]*)(})"
+        }, {
+            token : "storage.type",
+            regex : /\\verb\b\*?/,
+            next : [{
+                token : ["keyword.operator", "string", "keyword.operator"],
+                regex : "(.)(.*?)(\\1|$)|",
+                next : "start"
+            }]
         }, {
             token : "storage.type",
             regex : "\\\\[a-zA-Z]+"
@@ -52,9 +68,24 @@ var LatexHighlightRules = function() {
             next : "start" 
         }, {
             defaultToken : "string"
+        }],
+        "verbatim": [{
+            token : ["storage.type", "lparen", "variable.parameter", "rparen"],
+            regex : "(\\\\end)({)(verbatim)(})",
+            next : "start"
+        }, {
+            defaultToken : "text"
+        }],
+        "lstlisting": [{
+            token : ["storage.type", "lparen", "variable.parameter", "rparen"],
+            regex : "(\\\\end)({)(lstlisting)(})",
+            next : "start"
+        }, {
+            defaultToken : "text"
         }]
-
     };
+
+    this.normalizeRules();
 };
 oop.inherits(LatexHighlightRules, TextHighlightRules);
 
@@ -179,18 +210,18 @@ var MatchingBraceOutdent = function() {};
 exports.MatchingBraceOutdent = MatchingBraceOutdent;
 });
 
-ace.define("ace/mode/rdoc",["require","exports","module","ace/lib/oop","ace/mode/text","ace/mode/text_highlight_rules","ace/mode/rdoc_highlight_rules","ace/mode/matching_brace_outdent"], function(acequire, exports, module) {
+ace.define("ace/mode/rdoc",["require","exports","module","ace/lib/oop","ace/mode/text","ace/mode/rdoc_highlight_rules","ace/mode/matching_brace_outdent"], function(acequire, exports, module) {
 "use strict";
 
 var oop = acequire("../lib/oop");
 var TextMode = acequire("./text").Mode;
-var TextHighlightRules = acequire("./text_highlight_rules").TextHighlightRules;
 var RDocHighlightRules = acequire("./rdoc_highlight_rules").RDocHighlightRules;
 var MatchingBraceOutdent = acequire("./matching_brace_outdent").MatchingBraceOutdent;
 
 var Mode = function(suppressHighlighting) {
 	this.HighlightRules = RDocHighlightRules;
     this.$outdent = new MatchingBraceOutdent();
+    this.$behaviour = this.$defaultBehaviour;
 };
 oop.inherits(Mode, TextMode);
 

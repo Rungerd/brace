@@ -230,16 +230,16 @@ oop.inherits(MatlabHighlightRules, TextHighlightRules);
 exports.MatlabHighlightRules = MatlabHighlightRules;
 });
 
-ace.define("ace/mode/matlab",["require","exports","module","ace/lib/oop","ace/mode/text","ace/mode/matlab_highlight_rules","ace/range"], function(acequire, exports, module) {
+ace.define("ace/mode/matlab",["require","exports","module","ace/lib/oop","ace/mode/text","ace/mode/matlab_highlight_rules"], function(acequire, exports, module) {
 "use strict";
 
 var oop = acequire("../lib/oop");
 var TextMode = acequire("./text").Mode;
 var MatlabHighlightRules = acequire("./matlab_highlight_rules").MatlabHighlightRules;
-var Range = acequire("../range").Range;
 
 var Mode = function() {
     this.HighlightRules = MatlabHighlightRules;
+    this.$behaviour = this.$defaultBehaviour;
 };
 oop.inherits(Mode, TextMode);
 

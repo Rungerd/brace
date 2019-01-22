@@ -275,7 +275,7 @@ var MatchingBraceOutdent = function() {};
 exports.MatchingBraceOutdent = MatchingBraceOutdent;
 });
 
-ace.define("ace/mode/r",["require","exports","module","ace/range","ace/lib/oop","ace/mode/text","ace/mode/text_highlight_rules","ace/mode/r_highlight_rules","ace/mode/matching_brace_outdent","ace/unicode"], function(acequire, exports, module) {
+ace.define("ace/mode/r",["require","exports","module","ace/range","ace/lib/oop","ace/mode/text","ace/mode/text_highlight_rules","ace/mode/r_highlight_rules","ace/mode/matching_brace_outdent"], function(acequire, exports, module) {
    "use strict";
 
    var Range = acequire("../range").Range;
@@ -284,12 +284,11 @@ ace.define("ace/mode/r",["require","exports","module","ace/range","ace/lib/oop",
    var TextHighlightRules = acequire("./text_highlight_rules").TextHighlightRules;
    var RHighlightRules = acequire("./r_highlight_rules").RHighlightRules;
    var MatchingBraceOutdent = acequire("./matching_brace_outdent").MatchingBraceOutdent;
-   var unicode = acequire("../unicode");
 
-   var Mode = function()
-   {
+   var Mode = function(){
       this.HighlightRules = RHighlightRules;
       this.$outdent = new MatchingBraceOutdent();
+      this.$behaviour = this.$defaultBehaviour;
    };
    oop.inherits(Mode, TextMode);
 

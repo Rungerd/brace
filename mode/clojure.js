@@ -222,6 +222,7 @@ var MatchingParensOutdent = acequire("./matching_parens_outdent").MatchingParens
 var Mode = function() {
     this.HighlightRules = ClojureHighlightRules;
     this.$outdent = new MatchingParensOutdent();
+    this.$behaviour = this.$defaultBehaviour;
 };
 oop.inherits(Mode, TextMode);
 

@@ -120,6 +120,7 @@ var FoldMode = acequire("./folding/haskell_cabal").FoldMode;
 var Mode = function() {
     this.HighlightRules = CabalHighlightRules;
     this.foldingRules = new FoldMode();
+    this.$behaviour = this.$defaultBehaviour;
 };
 oop.inherits(Mode, TextMode);
 
